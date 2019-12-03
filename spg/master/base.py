@@ -19,6 +19,7 @@ class SPGMasterDB:
             self.connection = sql.connect("%s/spg-pool.sqlite"%CONFIG_DIR, timeout = TIMEOUT)
         else:
             self.connection = connection
+        self.test_run = False
             
         self.EnsembleConstructor = EnsembleConstructor
         self.cursor = self.connection.cursor()
@@ -79,6 +80,7 @@ class SPGMasterDB:
         self.normalising = 0.
         self.active_dbs = []
         for (id, full_name, weight, queue, status) in res:
+           # print (id, full_name, weight, queue, status)
             self.result_dbs[full_name] = {}
             self.result_dbs[full_name]['id'] = id
             self.result_dbs[full_name]['queue'] = queue
@@ -87,6 +89,7 @@ class SPGMasterDB:
             if status == 'R':
                 self.normalising += weight
                 self.active_dbs.append(full_name)
+           #     print full_name, self.result_dbs[full_name]
 
 
     def write_ensemble_to_master(self, param_db):

@@ -103,7 +103,7 @@ class ParameterEnsemble:
         try:
             (self.command, ) = self.execute_query_fetchone( "SELECT value FROM information WHERE key = 'command'" )
         except:
-            utils.newline_msg("FATAL",  "Cannot retreive information from database '%s'..."%utils.shorten_name(self.db_name))
+            utils.newline_msg("FATAL",  "Cannot retrieve information from database '%s'..."%utils.shorten_name(self.db_name))
             sys.exit(2)
         #:::~ get the names of the columns
         sel = self.execute_query("SELECT name FROM entities ORDER BY id")
@@ -340,7 +340,6 @@ class ParameterEnsembleThreaded(ParameterEnsemble):
         #        self.init_db()
         os.chdir(self.path)
 
-        self.test_run = False
 
         if os.path.exists("./%s" % self.command):
             self.bin_dir = "."
